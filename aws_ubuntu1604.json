@@ -1,0 +1,35 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/docker.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh"
+    }
+  ],
+  "builders": [
+   {
+  "type": "amazon-ebs",
+  "region": "eu-west-1",
+  "source_ami": "ami-c0cff0a6",
+  "ssh_username": "ubuntu",
+  "instance_type": "t2.small",
+  "ssh_username": "ubuntu",
+  "ami_name": "packer-quick-start {{timestamp}}",
+  "run_tags": {
+        "OS_Version": "Ubuntu",
+        "Release": "Latest",
+        "Runner": "Packer"
+      },
+   "tags": {
+        "OS_Version": "Ubuntu",
+        "Release": "Latest",
+        "Runner": "EC2"
+      }
+    }
+  ]
+}
